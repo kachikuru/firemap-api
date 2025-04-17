@@ -1,8 +1,10 @@
 from flask import Flask, make_response
+from flask_cors import CORS  # ← 追加
 import update_fire_map
 import os
 
 app = Flask(__name__)
+CORS(app)  # ← 追加
 
 @app.route("/run-map-update", methods=["POST"])
 def run_map_update():
