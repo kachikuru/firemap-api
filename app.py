@@ -1,10 +1,10 @@
 from flask import Flask, make_response
-from flask_cors import CORS  # ✅ 追加
+from flask_cors import CORS  # ✅ これが必要
 import update_fire_map
 import os
 
 app = Flask(__name__)
-CORS(app)  # ✅ 全ルートにCORS許可
+CORS(app)  # ✅ これがないと CORS ヘッダーが付かない！
 
 @app.route("/run-map-update", methods=["POST"])
 def run_map_update():
