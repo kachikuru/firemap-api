@@ -1,4 +1,3 @@
-
 import pandas as pd
 from haversine import haversine, Unit
 from utils import fetch_latest_fire_address, geocode_address, load_hydrant_data, extract_nearby_hydrants, save_to_csv
@@ -6,11 +5,13 @@ from utils import fetch_latest_fire_address, geocode_address, load_hydrant_data,
 def main():
     # 最新の火災住所を取得
     fire_address = fetch_latest_fire_address()
+    print(f"[DEBUG] 取得された火災住所: {fire_address!r}")  # repr 形式で表示
 
     # 消火栓データ全体を読み込み
     all_hydrants = load_hydrant_data("hydrants.csv")
 
-    if fire_address:
+    # 空文字・空白だけの文字列は「火災なし」とみなす
+    if fire_address and fire_address.strip():
         print(f"火災住所が検出されました: {fire_address}")
         fire_location = geocode_address(fire_address)
 
